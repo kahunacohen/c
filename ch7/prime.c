@@ -1,42 +1,41 @@
- 
- // Write a program that reads in a line of input and then prints the line in reverse order.
- // You can store the input in an array of char; assume that the line is no longer than 255
- // characters. Recall that you can use scanf() with the %c specifier to read a character at
- // a time from input and that the newline character (\n) is generated when you press the
- // Enter key.
-
+// Write a program that accepts a positive integer as input and displays all the
+// prime numbers smaller than or equal to that number.
 #include <stdio.h>
 #include <stdlib.h> 
+#include <stdbool.h> 
+#include <math.h>
+
+bool is_prime(unsigned int);
 
 int main(void) {
-	int line_size = 10;	
-	int i = 0;
-	int  j;
-	char c;
-	char *line = malloc(line_size * sizeof(char));
-	if (line == NULL) {
-  		fprintf(stderr, "malloc failed\n");
-  		return -1;
-	}
-	printf("Enter a line of text and ENTER to see it reversed\n");
-	while (scanf("%c", &c) == 1) {
-		if (i != 0 && i % 11 == 0) {
-			line_size += 10;
-			printf("re-allocate line char array to %d\n", line_size);
-			line = (char *) realloc(line, line_size * sizeof(char));
+	unsigned int n;
+	printf("Enter a positive integer to get all primer numbers smaller or equal to it.\n");
+	scanf("%d", &n);
+	while (n > 1) {
+		// Only even prime number is 2.
+		if (n == 2 || n % 2 != 0){ 
+			// printf("testing for prime %d\n", n);
+			// printf("%d\n", is_prime(n));
+			// is_prime(n);
+			printf("%d is prime?%d\n", n, is_prime(n));
 		}
-		line[i] = c;
-		i++;
-
-		if (c == '\n') {
-			break;
-		}
+		n--;
 	}
-	for (j = i; j >= 0; j--) {
-		printf("%c", line[j]);
-	}
-	printf("\n");
-	// printf("size of line: %lu", sizeof line);
-	free(line);
 	return 0;
+}
+
+
+bool is_prime(unsigned int n) {
+	// get rounded square of n since that's the max
+	// factors that a number could be. E.g. 9 has max factors of
+	// 3 * 3, so it's not prime. We can start checking factors from there.
+	int s = (int)round(sqrt(n));
+	for (int i = s; i > 1; i--) {
+		printf("check %d * %d = %d\n", s, i, n);
+		if (s * i == n) {
+			// printf("not prime");
+			return false;
+		}
+	}
+	return true;
 }
