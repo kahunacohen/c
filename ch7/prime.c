@@ -8,32 +8,36 @@
 bool is_prime(unsigned int);
 
 int main(void) {
-	unsigned int n;
-	printf("Enter a positive integer to get all primer numbers smaller or equal to it.\n");
+	int n;
+	printf("Enter a number and we'll give you every prime number <= to your number.\n");
 	scanf("%d", &n);
-	while (n > 1) {
-		// Only even prime number is 2.
-		if (n == 2 || n % 2 != 0){ 
-			// printf("testing for prime %d\n", n);
-			// printf("%d\n", is_prime(n));
-			// is_prime(n);
-			printf("%d is prime?%d\n", n, is_prime(n));
+	for (int i = n; i > 0; i--) {
+		if (is_prime(i)) {
+			printf("%d\n", i);
 		}
-		n--;
 	}
-	return 0;
+	// printf("0 prime? %d\n", is_prime(0));
+	// printf("1 prime? %d\n", is_prime(1));
+	// printf("2 prime? %d\n", is_prime(2));
+	// printf("3 prime? %d\n", is_prime(3));
+	// printf("4 prime? %d\n", is_prime(4));
+	// printf("11 prime? %d\n", is_prime(11));
+	// printf("15 prime? %d\n", is_prime(15));
+	// printf("239 prime? %d\n", is_prime(239));
 }
 
 
 bool is_prime(unsigned int n) {
-	// get rounded square of n since that's the max
-	// factors that a number could be. E.g. 9 has max factors of
-	// 3 * 3, so it's not prime. We can start checking factors from there.
-	int s = (int)round(sqrt(n));
-	for (int i = s; i > 1; i--) {
-		printf("check %d * %d = %d\n", s, i, n);
-		if (s * i == n) {
-			// printf("not prime");
+	if (n == 2) {
+		return true;
+	}
+	if (n % 2 == 0) {
+		return false;
+	}
+	int sq = (int)round(sqrt(n));
+	for (int i = sq; i >= 3;  i--) {
+		// printf("%d mod %d = %d\n", n, i, n % i);
+		if (n % i == 0) {
 			return false;
 		}
 	}
