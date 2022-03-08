@@ -31,9 +31,15 @@ int main(void) {
 
 void to_base(unsigned long n, int base) {
 	int r;
-	// Determine if the number is odd or even.
-	// In binary even numbers will end in 0, odd inq
-	r = n %2;
+	// Determine if the number is odd or even. 
+	// If base is even, e.g. 2 or 10, then number will end with
+	// 0.
+	if (base % 2 == 0) {
+		printf("base is even");
+		r = n %2;
+	} else {
+		r = n % 1;
+	}
 
 	// The base case is when n < 2 because, for example, if n
 	// is 1 or 0 there's nothing more to do.
