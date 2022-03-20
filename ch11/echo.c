@@ -22,17 +22,14 @@ int main(int argc, char*argv[]) {
 	if (argv[1] != NULL) {
 		mode = argv[1][1];
 	}
-	printf("mode: %c\n", mode);
 	while ((ch = getchar()) != EOF) {
 		
 	
-		if (strcmp(&mode, "l") == 0) {
-			// printf("lower");
+		if (mode == 'l') {
 			putchar(tolower(ch));
-		} else if (strcmp(&mode, "u") == 0) {
+		} else if (mode == 'u') {
 			putchar(toupper(ch));
 		} else {
-			// printf("default\n");
 			putchar(ch);	
 		}
 	}
